@@ -16,29 +16,29 @@ public class GoogleSearchTest {
 
 	@Before
 	public void setUp() {
-		// launch a new Firefox instance
+		// Launch a new Firefox instance
 		driver = new FirefoxDriver();
-		// maximize the browser window
+		// Maximize the browser window
 		driver.manage().window().maximize();
-		// navigate to Google
+		// Navigate to Google
 		driver.get("http://www.google.com");
 	}
 
 	@Test
 	public void testGoogleSearch() {
-		// find the text input element by its name
+		// Find the text input element by its name
 		WebElement element = driver.findElement(By.name("q"));
-		// clear the existing text value
+		// Clear the existing text value
 		element.clear();
 
-		// enter something to search for
+		// Enter something to search for
 		element.sendKeys("Selenium testing tools cookbook");
 
-		// now submit the form
+		// Now submit the form
 		element.submit();
 
 		// Google's search is rendered dynamically with JavaScript.
-		// wait for the page to load, timeout after 10 seconds
+		// Wait for the page to load, timeout after 10 seconds
 		new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver d) {
 				return d.getTitle().toLowerCase()
@@ -52,7 +52,7 @@ public class GoogleSearchTest {
 
 	@After
 	public void tearDown() throws Exception {
-		// close the browser
+		// Close the browser
 		driver.quit();
 	}
 }

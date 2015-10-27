@@ -1,28 +1,33 @@
 package com.secookbook.examples.chapter01;
 
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.junit.*;
-
 import static org.junit.Assert.*;
 
-public class GoogleSearchTestOnChrome {
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class GoogleSearchTestOnEdge {
 
 	private WebDriver driver;
 
 	@Before
 	public void setUp() {
-		System.setProperty("webdriver.chrome.driver",
-				"./src/test/resources/drivers/chromedriver.exe");
+		System.setProperty("webdriver.edge.driver",
+				"C:\\Program Files (x86)\\Microsoft Web Driver\\MicrosoftWebDriver.exe");
 
-		// Launch Chrome
-		driver = new ChromeDriver();
-		// Maximize the browser window
-		driver.manage().window().maximize();
+		EdgeOptions options = new EdgeOptions();
+		options.setPageLoadStrategy("eager");
+
+		// Launch a new Edge instance
+		driver = new EdgeDriver(options);
+
 		// Navigate to Google
 		driver.get("http://www.google.com");
 	}
@@ -32,12 +37,14 @@ public class GoogleSearchTestOnChrome {
 		// Find the text input element by its name
 		WebElement element = driver.findElement(By.name("q"));
 
+		// Clear the existing text value
+		element.clear();
+
 		// Enter something to search for
 		element.sendKeys("Selenium testing tools cookbook");
 
-		// Now submit the form. WebDriver will find
-		// the form for us from the element
-		element.submit();
+		WebElement button = driver.findElement(By.name("btnG"));
+		button.click();
 
 		// Google's search is rendered dynamically with JavaScript.
 		// Wait for the page to load, timeout after 10 seconds
@@ -57,4 +64,5 @@ public class GoogleSearchTestOnChrome {
 		// Close the browser
 		driver.quit();
 	}
+
 }

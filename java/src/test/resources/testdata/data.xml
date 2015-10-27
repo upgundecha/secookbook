@@ -1,0 +1,7 @@
+<testdata>
+	<vars height="160" weight="45" bmi="17.6" bmi_category="Underweight" />
+	<vars height="168" weight="70" bmi="24.8" bmi_category="Normal" />
+	<vars height="181" weight="89" bmi="27.2" bmi_category="Overweight" />
+	<vars height="178" weight="100" bmi="31.6" bmi_category="Obesity" />
+</testdata>
+
